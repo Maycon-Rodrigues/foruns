@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create]
+  before_action :owned_page, only: [:edit, :update, :destroy]
 
   # GET /pages
   # GET /pages.json
@@ -14,7 +16,7 @@ class PagesController < ApplicationController
 
   # GET /pages/new
   def new
-    @page = Page.new
+    @page = current_user.pages.build
   end
 
   # GET /pages/1/edit
@@ -24,7 +26,7 @@ class PagesController < ApplicationController
   # POST /pages
   # POST /pages.json
   def create
-    @page = Page.new(page_params)
+    @page = current_user.pages.build(page_params)
 
     respond_to do |format|
       if @page.save
@@ -70,5 +72,11 @@ class PagesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
       params.require(:page).permit(:name, :slug, :user_id)
+    end
+
+    def owned_page
+      unless current_user == @page.user
+        redirect_to root_path
+      end
     end
 end

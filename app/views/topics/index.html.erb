@@ -16,11 +16,11 @@
     <% @topics.each do |topic| %>
       <tr>
         <td><%= topic.title %></td>
-        <td><%= topic.user %></td>
-        <td><%= topic.page %></td>
-        <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= topic.user.username %></td>
+        <td><%= topic.page.name %></td>
+        <td><%= link_to 'Show', [topic.page, topic] %></td>
+        <td><%= link_to 'Edit', edit_page_topic_path(topic.page, topic) %></td>
+        <td><%= link_to 'Destroy', [topic.page, topic], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Topic', new_page_topic_path %>

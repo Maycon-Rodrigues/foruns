@@ -12,8 +12,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @page.user %>
+  <%= @page.user.username %>
 </p>
+
+<% @page.topics.each do |topic| %>
+    <%= link_to topic.title, [@page, topic] %><br>
+<% end %>
 
 <%= link_to 'Edit', edit_page_path(@page) %> |
 <%= link_to 'Back', pages_path %>

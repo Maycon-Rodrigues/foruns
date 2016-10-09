@@ -6,14 +6,19 @@
 </p>
 
 <p>
+  <strong>Content:</strong>
+  <%= @topic.content %>
+</p>
+
+<p>
   <strong>User:</strong>
-  <%= @topic.user %>
+  <%= @topic.user.username %>
 </p>
 
 <p>
   <strong>Page:</strong>
-  <%= @topic.page %>
+  <%= @topic.page.name %>
 </p>
 
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>
+<%= link_to 'Edit', edit_page_topic_path(@page, @topic) %> |
+<%= link_to 'Back', page_topics_path %>
